@@ -1,24 +1,25 @@
 package bootstrap;
 
+import bootstrap.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import bootstrap.model.Role;
 import bootstrap.model.User;
-import bootstrap.repositories.UserRepository;
 
 @Component
 public class Test {
-    private final UserRepository userRepository;
-
+    private final UserService userService;
     @Autowired
-    public Test(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public Test(UserService userService) {
+        this.userService = userService;
     }
 
+
+
     @Bean
-    @Transactional
+@Transactional
     public void addDefaultUsers() {
         User user = new User("userFirstName", "userLastName",18 , "user@mail.ru","user");
         Role roleUser = new Role("ROLE_USER");
@@ -29,7 +30,7 @@ public class Test {
         admin.addRole(roleAdmin);
         admin.addRole(roleUser);
         roleAdmin.addUser(admin);
-        userRepository.save(user);
-        userRepository.save(admin);
+        userService.create(user);
+        userService.create(admin);
     }
 }

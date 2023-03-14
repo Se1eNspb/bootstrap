@@ -11,7 +11,7 @@ public class Role {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String roleName;
-    @ManyToMany(mappedBy = "roles")
+    @ManyToMany
     private List<User> users;
 
     public Role() {}
