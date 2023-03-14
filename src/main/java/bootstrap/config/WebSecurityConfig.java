@@ -1,6 +1,6 @@
 package bootstrap.config;
 
-import bootstrap.service.UserServiceImp;
+import bootstrap.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -10,12 +10,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-    private final UserServiceImp userService;
+    private final UserService userService;
     private final SuccessUserHandler successUserHandler;
     private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public WebSecurityConfig(UserServiceImp userService, SuccessUserHandler successUserHandler, PasswordEncoder passwordEncoder) {
+    public WebSecurityConfig(UserService userService, SuccessUserHandler successUserHandler, PasswordEncoder passwordEncoder) {
         this.userService = userService;
         this.successUserHandler = successUserHandler;
         this.passwordEncoder = passwordEncoder;
